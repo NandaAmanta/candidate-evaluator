@@ -2,16 +2,20 @@ from typing import Optional
 from sqlmodel import Field
 from pydantic import BaseModel
 from src.candidate.models import Candidate
+from fastapi import UploadFile, File
 
-class UploadResume(BaseModel):
-    file : str
+class CandidateCreation(BaseModel):
+    name: Optional[str] = None
+    email: Optional[str] = None
+    age: Optional[int] = None
+    file_path : str
+    user_id: int
 
 class CandidateUpdate(BaseModel):
     name: Optional[str] = None
     email: Optional[str] = None
     age: Optional[int] = None
     
-
 class CanidateRead(BaseModel):
     id: Optional[int] = None
     name: str

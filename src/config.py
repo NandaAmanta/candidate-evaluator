@@ -13,5 +13,6 @@ class Settings:
     JWT_ACCESS_TOKEN_SECRET_KEY = os.getenv("JWT_ACCESS_TOKEN_SECRET_KEY")
     JWT_REFRESH_TOKEN_SECRET_KEY = os.getenv("JWT_REFRESH_TOKEN_SECRET_KEY")
     JWT_ALGORITHM = os.getenv("JWT_ALGORITHM", "HS256")
+    UPLOAD_DIR = os.getenv("UPLOAD_DIR", "storage")
 
 settings = Settings()
