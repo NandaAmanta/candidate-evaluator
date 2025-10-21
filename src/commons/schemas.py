@@ -7,8 +7,12 @@ from fastapi.encoders import jsonable_encoder
 M = TypeVar('M')
 
 class PaginatedResponse(GenericModel, Generic[M]):
-    count: int = Field(description='Number of items returned in the response')
+    total: int = Field(description='Number of total items found in the database')
+    page: int = Field(description='Current page number')
+    pages: int = Field(description='Number of total pages')
+    limit: int = Field(description='Number of items per page')
     items: List[M] = Field(description='List of items returned in the response following given criteria')
+    
 
 class BaseApiResponse(BaseModel, Generic[M]):
     message: str
