@@ -13,8 +13,6 @@ class Token (BaseModel):
     access_token: str
     refresh_token: str
 
-
-
 class UserUpdate(BaseModel):
     name: Optional[str] = None
     email: Optional[str] = None

@@ -24,15 +24,10 @@ def create_refresh_token(data: dict, expires_delta: timedelta | None = None):
     return encoded_jwt
 
 def decode_access_token(token: str):
-    try:
-        payload = jwt.decode(token, settings.JWT_ACCESS_TOKEN_SECRET_KEY, algorithms=[settings.JWT_ALGORITHM])
-        return payload
-    except InvalidTokenError:
-        return None
+    payload = jwt.decode(token, settings.JWT_ACCESS_TOKEN_SECRET_KEY, algorithms=[settings.JWT_ALGORITHM])
+    return payload
     
 def decode_refresh_token(token: str):
-    try:
-        payload = jwt.decode(token, settings.JWT_REFRESH_TOKEN_SECRET_KEY, algorithms=[settings.JWT_ALGORITHM])
-        return payload
-    except InvalidTokenError:
-        return None
+    payload = jwt.decode(token, settings.JWT_REFRESH_TOKEN_SECRET_KEY, algorithms=[settings.JWT_ALGORITHM])
+    return payload
+    

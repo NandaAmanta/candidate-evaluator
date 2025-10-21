@@ -2,22 +2,32 @@ from typing import Type, TypeVar, Generic, Protocol, Optional
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import NoResultFound
 from src.database import engine
+from fastapi_pagination.ext.sqlalchemy import paginate
+from fastapi_pagination import Page
+from sqlalchemy import select
 
 T = TypeVar("T")
 CreateSchemaType = TypeVar("CreateSchemaType")
 UpdateSchemaType = TypeVar("UpdateSchemaType")
+ReadSchemaType = TypeVar("ReadSchemaType")
 
 class BaseRepositoryProtocol(Generic[T, CreateSchemaType, UpdateSchemaType], Protocol):
     def create(self, obj_in: CreateSchemaType) -> T: ...
     def find_by_id(self, id: int) -> Optional[T]: ...
     def update(self, id: int, obj_in: UpdateSchemaType) -> T: ...
     def delete(self, id: int) -> None: ...
+    def paginate(self, query: Optional[dict] ) -> Page[T]: ...
 
 
 class BaseSQLAlchemyRepository(Generic[T, CreateSchemaType, UpdateSchemaType]):
     def __init__(self, model: Type[T], session: Session = Session(engine)):
         self.model = model
         self.session = session
+
+    def paginate(self,query: Optional[dict]) -> Page[T]:
+        if query:
+            return paginate(self.session, select(self.model).order_by(self.model.id))
+        return paginate(self.session, select(self.model).order_by(self.model.id))
 
     def create(self, obj_in: CreateSchemaType) -> T:
         """Default create"""

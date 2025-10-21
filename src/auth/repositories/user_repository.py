@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from src.auth.models import User
 from src.auth.schemas import UserUpdate, UserCreation
 from src.database import engine
-from src.core.base_repository import (
+from src.commons.base_repository import (
     BaseSQLAlchemyRepository,
     BaseRepositoryProtocol,
 )

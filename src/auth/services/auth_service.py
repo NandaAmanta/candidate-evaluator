@@ -14,8 +14,9 @@ class AuthService:
         user = self.repository.find_by_email(data.email)
         if (user is None ) or (not verify_password(data.password, user.password)):
             raise HTTPException(status_code=403 ,detail="Invalid credentials")
-        access_token = create_access_token({"sub" : user.email})
-        refresh_token = create_refresh_token({"sub" : user.email})
+        
+        access_token = create_access_token({"sub" : str(user.id)})
+        refresh_token = create_refresh_token({"sub" : str(user.id)})
         return UserReadWithToken.from_orm(user, access_token, refresh_token)
     
     def register(self, data : UserCreation) -> UserRead:
