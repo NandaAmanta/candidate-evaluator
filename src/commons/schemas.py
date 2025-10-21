@@ -2,6 +2,7 @@ from typing import Optional, Generic, TypeVar, List
 from pydantic import BaseModel, Field
 from pydantic.generics import GenericModel
 from fastapi.responses import JSONResponse
+from fastapi.encoders import jsonable_encoder
 
 M = TypeVar('M')
 
@@ -16,11 +17,10 @@ class BaseApiResponse(BaseModel, Generic[M]):
     errors : Optional[List] = None
 
     def make(self):
-        data = self.data.model_dump() if isinstance(self.data, BaseModel) else self.data
         response = {
             "message": self.message,
             "status_code": self.status_code,
-            "data": data
+            "data": jsonable_encoder(self.data),
         }
         if self.errors is not None:
             response["errors"] = self.errors
