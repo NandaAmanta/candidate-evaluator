@@ -3,6 +3,7 @@ from src.dependencies import get_current_user
 from src.candidate.services.candidate_service import CandidateService
 from src.commons.schemas import BaseApiResponse
 from src.candidate.models import Candidate
+from typing import List
 
 router = APIRouter(prefix="/candidates", tags=["candidate"])
 
@@ -14,8 +15,8 @@ async def pagination(request: Request,user = Depends(get_current_user), service:
     return BaseApiResponse(data=data, message="Success", status_code=200).make()
 
 @router.post('/upload', status_code=201)
-async def create_candidate(file : UploadFile = File(...) , user = Depends(get_current_user), service: CandidateService = Depends()) -> BaseApiResponse:
-    data = await service.create(file, user["id"])
+async def create_candidate(files: List[UploadFile] = File(..., description="List of resumes to upload"), user = Depends(get_current_user), service: CandidateService = Depends()) -> BaseApiResponse:
+    data = await service.create(files, user["id"])
     return BaseApiResponse(data=data, message="Success", status_code=201).make()
 
 @router.post('/evaluate', status_code=201)
