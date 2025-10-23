@@ -1,5 +1,5 @@
 
-from fastapi import Depends, Request, UploadFile
+from fastapi import Depends, Request, UploadFile, BackgroundTasks
 from typing import List
 from src.candidate.repositories.candidate_repository import CandidateRepositoryProtocol
 from src.dependencies import get_candidate_repository
@@ -16,10 +16,8 @@ class CandidateService:
 
     def pagination(self, request: dict):
         return self.repository.paginate(request)
-    
 
     async def create(self, files: List[UploadFile], user_id: int):
-
         file_paths : List[str] = []
         for file in files:
             file_ext = os.path.splitext(file.filename)[1]
@@ -36,3 +34,22 @@ class CandidateService:
                 user_id=user_id
             )
         )
+
+    async def evaluate(self, candidate_ids: List[int], background_tasks: BackgroundTasks) -> List[Candidate]:
+        for candidate_id in candidate_ids:
+            background_tasks.add_task(self.process_evaluation, candidate_id)            
+
+    def process_evaluation(self, candidate_id : int) :
+        candidate = self.repository.find_by_id(candidate_id)
+        if(not candidate):
+            return
+            
+        self.repository.update(candidate_id, {"status": "PROCESSING"})
+
+        # TODO
+        # Do evaluation
+
+        
+        self.repository.update(candidate_id, {"status": "COMPLATE"})
+
+    
