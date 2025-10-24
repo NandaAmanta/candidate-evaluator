@@ -16,9 +16,9 @@ ReadSchemaType = TypeVar("ReadSchemaType")
 class BaseRepositoryProtocol(Generic[T, CreateSchemaType, UpdateSchemaType], Protocol):
     def create(self, obj_in: CreateSchemaType) -> T: ...
     def find_by_id(self, id: int) -> Optional[T]: ...
-    def update(self, id: int, obj_in: UpdateSchemaType) -> T: ...
+    def update(self, id: int, obj_in: UpdateSchemaType | dict) -> T: ...
     def delete(self, id: int) -> None: ...
-    def paginate(self, query: Optional[dict] ) -> Page[T]: ...
+    def paginate(self, query: Optional[dict] ) -> PaginatedResponse[T]: ...
 
 
 class BaseSQLAlchemyRepository(Generic[T, CreateSchemaType, UpdateSchemaType]):
@@ -26,7 +26,7 @@ class BaseSQLAlchemyRepository(Generic[T, CreateSchemaType, UpdateSchemaType]):
         self.model = model
         self.session = session
 
-    def paginate(self, query: Dict[str, Any]) -> Dict[str, Any]:
+    def paginate(self, query: Dict[str, Any]) -> PaginatedResponse[T]:
         page = int(query.get("page", 1))
         limit = int(query.get("limit", 10))
         search = query.get("search")
@@ -79,13 +79,17 @@ class BaseSQLAlchemyRepository(Generic[T, CreateSchemaType, UpdateSchemaType]):
         """Default find by id"""
         return self.session.query(self.model).filter(self.model.id == id).first()
 
-    def update(self, id: int, obj_in: UpdateSchemaType) -> T:
+    def update(self, id: int, obj_in: UpdateSchemaType | dict) -> T:
         """Default update"""
         db_obj = self.find_by_id(id)
         if not db_obj:
             raise NoResultFound(f"{self.model.__name__} with id {id} not found")
 
-        obj_data = obj_in.dict(exclude_unset=True)
+        if isinstance(obj_in, dict):
+            obj_data = obj_in
+        else:
+            obj_data = obj_in.dict(exclude_unset=True)
+
         for field, value in obj_data.items():
             setattr(db_obj, field, value)
 

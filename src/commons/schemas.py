@@ -1,4 +1,4 @@
-from typing import Optional, Generic, TypeVar, List
+from typing import Optional, Generic, TypeVar, List, Dict
 from pydantic import BaseModel, Field
 from pydantic.generics import GenericModel
 from fastapi.responses import JSONResponse
@@ -11,7 +11,7 @@ class PaginatedResponse(GenericModel, Generic[M]):
     page: int = Field(description='Current page number')
     pages: int = Field(description='Number of total pages')
     limit: int = Field(description='Number of items per page')
-    items: List[M] = Field(description='List of items returned in the response following given criteria')
+    items: List[M | Dict] = Field(description='List of items returned in the response following given criteria')
     
 
 class BaseApiResponse(BaseModel, Generic[M]):
