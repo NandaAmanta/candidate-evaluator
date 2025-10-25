@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, Request, UploadFile, File, BackgroundTasks
+from fastapi import APIRouter, Depends, Request, UploadFile, File, BackgroundTasks, HTTPException
 from src.dependencies import get_current_user
 from src.candidate.services.candidate_service import CandidateService 
 from src.candidate.services.evaluation_service import EvaluationService
@@ -22,6 +22,8 @@ async def detail(id: int, user = Depends(get_current_user), service: CandidateSe
 
 @router.post('/upload', status_code=201)
 async def create_candidate(cv_files: List[UploadFile] = File(..., description="List of cv files to upload"), project_files: List[UploadFile] = File(..., description="List of project files to upload"), user = Depends(get_current_user), service: CandidateService = Depends()) -> BaseApiResponse:
+    await pdf_validation(cv_files)
+    await pdf_validation(project_files)
     data = await service.create(cv_files, project_files, user["id"])
     return BaseApiResponse(data=data, message="Success", status_code=201).make()
 
@@ -40,3 +42,11 @@ async def evaluate_candidate( background_tasks: BackgroundTasks, data : Candidat
     service.evaluate(data.candidate_ids, background_tasks)
     return BaseApiResponse(data={'data_processed_count' : len(data.candidate_ids)}, message="Success", status_code=200).make()
 
+
+async def pdf_validation(files : List[UploadFile]):
+    for file in files:
+        if file.content_type != "application/pdf":
+            raise HTTPException(
+                status_code=400,
+                detail=f"File {file.filename} is not a PDF. Only PDF files are allowed."
+            )
