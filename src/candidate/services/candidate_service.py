@@ -3,7 +3,7 @@ from fastapi import Depends, Request, UploadFile, BackgroundTasks
 from typing import List
 from src.candidate.repositories.candidate_repository import CandidateRepositoryProtocol
 from src.dependencies import get_candidate_repository
-from src.candidate.schemas import CandidateCreation, CandidateRead
+from src.candidate.schemas import CandidateCreation, CandidateRead, CandidateUpdate
 from src.config import settings
 import os
 import uuid
@@ -24,6 +24,13 @@ class CandidateService:
         if(data.user_id != user_id):
             raise HTTPException(status_code=403, detail="Unauthorized")
         return CandidateRead.from_orm(data)
+    
+    def update(self, id: int, data: CandidateUpdate, user_id : int) -> CandidateRead:
+        existing = self.repository.find_by_id(id)
+        if(existing.user_id != user_id):
+            raise HTTPException(status_code=403, detail="Unauthorized")
+        updated = self.repository.update(id, data)
+        return CandidateRead.from_orm(updated)
 
     async def create(self, cv_files: List[UploadFile], project_files: List[UploadFile], user_id: int):
         cv_paths : List[str] = []

@@ -1,0 +1,580 @@
+{
+	"info": {
+		"_postman_id": "aab08539-fc66-472e-95fc-e894ba4990eb",
+		"name": "Candidate Evaluator",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "42574652"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"astari@gmail.comsss\",\r\n    \"password\": \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/v1/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\" : \"astari@gmail.comsss\",\r\n    \"password\" : \"password\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8000/api/v1/auth/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "date",
+									"value": "Tue, 21 Oct 2025 08:01:53 GMT"
+								},
+								{
+									"key": "server",
+									"value": "uvicorn"
+								},
+								{
+									"key": "content-length",
+									"value": "395"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success\",\n    \"status_code\": 200,\n    \"data\": {\n        \"id\": 6,\n        \"name\": \"Astari\",\n        \"email\": \"astari@gmail.comsss\",\n        \"age\": 15,\n        \"token\": {\n            \"access_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2IiwiZXhwIjoxNzYxMTIwMTE1fQ.-BVZh4hCB8UpXMxGBcf_vq6aJ23-aqAjQEawM30cDHM\",\n            \"refresh_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2IiwiZXhwIjoxNzYxNjM4NTE1fQ.rVgVCbOwgwstpWmw7PxklfuCBwehXZgGXH0Wcs6CWMo\"\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Registration",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"Nanda Amanta\",\r\n    \"email\" : \"nansamgr@gmail.com\",\r\n    \"password\" : \"password\",\r\n    \"age\" : 15\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/v1/auth/registration",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"registration"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\" : \"Astari\",\r\n    \"email\" : \"astari@gmail.comssss\",\r\n    \"password\" : \"password\",\r\n    \"age\" : 15\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8000/api/v1/auth/registration",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"registration"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "date",
+									"value": "Tue, 21 Oct 2025 08:04:17 GMT"
+								},
+								{
+									"key": "server",
+									"value": "uvicorn"
+								},
+								{
+									"key": "content-length",
+									"value": "132"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"User registered successfully\",\n    \"status_code\": 201,\n    \"data\": {\n        \"id\": 7,\n        \"name\": \"Astari\",\n        \"email\": \"astari@gmail.comssss\",\n        \"age\": 15\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "candidates",
+			"item": [
+				{
+					"name": "pagination",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2IiwiZXhwIjoxNzYxMzQ4MDE2fQ.YdmGz4a40t9dZNFzs9MDpjv-GSjoz1teidtksnoInMk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/v1/candidates",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"candidates"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8000/api/v1/candidates",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"v1",
+										"candidates"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "date",
+									"value": "Sat, 25 Oct 2025 04:48:35 GMT"
+								},
+								{
+									"key": "server",
+									"value": "uvicorn"
+								},
+								{
+									"key": "content-length",
+									"value": "3906"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success\",\n    \"status_code\": 200,\n    \"data\": {\n        \"total\": 11,\n        \"page\": 1,\n        \"pages\": 2,\n        \"limit\": 10,\n        \"items\": [\n            {\n                \"id\": 11,\n                \"name\": null,\n                \"email\": null,\n                \"age\": null,\n                \"cv_paths\": \"storage\\\\cv\\\\cde12099-ffe4-4219-aaa9-db7694759d8e.pdf\",\n                \"project_report_paths\": \"storage\\\\project\\\\b3efaee1-6500-4acd-b3fa-c761bba693e6.pdf\",\n                \"user_id\": 6,\n                \"status\": \"COMPLETED\",\n                \"evaluation_result_json\": {\n                    \"cv_match_rate\": 0.2,\n                    \"cv_feedback\": \"\",\n                    \"cv_breakdown\": {\n                        \"technical_skills\": 1,\n                        \"experience_level\": 1,\n                        \"achievements\": 1,\n                        \"cultural_fit\": 1,\n                        \"match_rate\": 0.2,\n                        \"feedback\": \"\"\n                    },\n                    \"project_score\": 1,\n                    \"project_feedback\": \"\",\n                    \"project_breakdown\": {\n                        \"correctness\": 1,\n                        \"code_quality\": 1,\n                        \"resilience\": 1,\n                        \"documentation\": 1,\n                        \"creativity\": 1,\n                        \"final_score\": 1,\n                        \"feedback\": \"\"\n                    },\n                    \"overall_summary\": \"This candidate demonstrates strong technical skills, relevant experience, and notable achievements, making them a highly qualified and culturally aligned fit for the role. However, the low match rate suggests potential areas for improvement in aligning their expertise with specific job requirements. Overall, they are highly recommended for hire based on their exceptional performance and qualifications.\"\n                },\n                \"error\": null\n            },\n            {\n                \"id\": 10,\n                \"name\": null,\n                \"email\": null,\n                \"age\": null,\n                \"cv_paths\": \"storage\\\\cv\\\\177085bf-9774-4c1a-99b3-535b2cd374d6.pdf\",\n                \"project_report_paths\": \"storage\\\\project\\\\c88ffb3b-4360-48b1-8e6c-f5d06394a16a.pdf\",\n                \"user_id\": 6,\n                \"status\": \"COMPLETED\",\n                \"evaluation_result_json\": {\n                    \"cv_match_rate\": 0.2,\n                    \"cv_feedback\": \"\",\n                    \"cv_breakdown\": {\n                        \"technical_skills\": 1,\n                        \"experience_level\": 1,\n                        \"achievements\": 1,\n                        \"cultural_fit\": 1,\n                        \"match_rate\": 0.2,\n                        \"feedback\": \"\",\n                        \"name\": null,\n                        \"age\": null,\n                        \"email\": null\n                    },\n                    \"project_score\": 1,\n                    \"project_feedback\": \"\",\n                    \"project_breakdown\": {\n                        \"correctness\": 1,\n                        \"code_quality\": 1,\n                        \"resilience\": 1,\n                        \"documentation\": 1,\n                        \"creativity\": 1,\n                        \"final_score\": 1,\n                        \"feedback\": \"\"\n                    },\n                    \"overall_summary\": \"Candidate Summary:\\n- The candidate demonstrates a basic understanding of technical skills, but their experience level, achievements, cultural fit, and match rate are all low, indicating a need for further development.\\n- In terms of project work, their technical skills are evident, but the quality of their code, resilience, creativity, and documentation are all average.\\n- Recommendation: Consider this candidate for entry-level roles where they can gain more experience and develop their skills further. However, they may not be ready for more complex or demanding positions at this time.\"\n                },\n                \"error\": null\n            },\n            {\n                \"id\": 9,\n                \"name\": null,\n                \"email\": null,\n                \"age\": null,\n                \"cv_paths\": \"storage/cv\\\\b19d7b2b-683d-4931-9baa-dc576d9954e3.pdf\",\n                \"project_report_paths\": \"storage\\\\project\\\\86b005f3-c058-4d58-91d4-9f982d0806d7.pdf\",\n                \"user_id\": 6,\n                \"status\": \"QUEUED\",\n                \"evaluation_result_json\": null,\n                \"error\": null\n            },\n            {\n                \"id\": 8,\n                \"name\": null,\n                \"email\": null,\n                \"age\": null,\n                \"cv_paths\": \"storage/cv\\\\aadd2a5c-51cc-4ce0-ab10-591789281359.pdf\",\n                \"project_report_paths\": \"storage/project\\\\983b22c8-c450-4e9c-a62a-cfdb3db46359.pdf\",\n                \"user_id\": 6,\n                \"status\": \"QUEUED\",\n                \"evaluation_result_json\": null,\n                \"error\": null\n            },\n            {\n                \"id\": 7,\n                \"name\": null,\n                \"email\": null,\n                \"age\": null,\n                \"cv_paths\": \"storage/cv\\\\3d839033-0bc0-4379-9e4c-f8328da5fc4b.pdf\",\n                \"project_report_paths\": \"\",\n                \"user_id\": 6,\n                \"status\": \"QUEUED\",\n                \"evaluation_result_json\": null,\n                \"error\": null\n            },\n            {\n                \"id\": 6,\n                \"name\": null,\n                \"email\": null,\n                \"age\": null,\n                \"cv_paths\": \"\",\n                \"project_report_paths\": \"\",\n                \"user_id\": 6,\n                \"status\": null,\n                \"evaluation_result_json\": null,\n                \"error\": null\n            },\n            {\n                \"id\": 5,\n                \"name\": null,\n                \"email\": null,\n                \"age\": null,\n                \"cv_paths\": \"\",\n                \"project_report_paths\": \"\",\n                \"user_id\": 6,\n                \"status\": null,\n                \"evaluation_result_json\": null,\n                \"error\": null\n            },\n            {\n                \"id\": 4,\n                \"name\": null,\n                \"email\": null,\n                \"age\": null,\n                \"cv_paths\": \"\",\n                \"project_report_paths\": \"\",\n                \"user_id\": 6,\n                \"status\": null,\n                \"evaluation_result_json\": null,\n                \"error\": null\n            },\n            {\n                \"id\": 3,\n                \"name\": null,\n                \"email\": null,\n                \"age\": null,\n                \"cv_paths\": \"\",\n                \"project_report_paths\": \"\",\n                \"user_id\": 6,\n                \"status\": null,\n                \"evaluation_result_json\": null,\n                \"error\": null\n            },\n            {\n                \"id\": 2,\n                \"name\": null,\n                \"email\": null,\n                \"age\": null,\n                \"cv_paths\": \"\",\n                \"project_report_paths\": \"\",\n                \"user_id\": 6,\n                \"status\": null,\n                \"evaluation_result_json\": null,\n                \"error\": null\n            }\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "detail",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2IiwiZXhwIjoxNzYxNDUxODg3fQ.bEw2MXIIYbIaRuqxnMspuGY394u1ef1TyzF936G6r_o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/v1/candidates/10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"candidates",
+								"10"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8000/api/v1/candidates/10",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"v1",
+										"candidates",
+										"10"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "date",
+									"value": "Sat, 25 Oct 2025 04:53:19 GMT"
+								},
+								{
+									"key": "server",
+									"value": "uvicorn"
+								},
+								{
+									"key": "content-length",
+									"value": "1304"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success\",\n    \"status_code\": 200,\n    \"data\": {\n        \"id\": 10,\n        \"name\": null,\n        \"email\": null,\n        \"age\": null,\n        \"cv_paths\": \"storage\\\\cv\\\\177085bf-9774-4c1a-99b3-535b2cd374d6.pdf\",\n        \"project_report_paths\": \"storage\\\\project\\\\c88ffb3b-4360-48b1-8e6c-f5d06394a16a.pdf\",\n        \"user_id\": 6,\n        \"status\": \"COMPLETED\",\n        \"evaluation_result_json\": {\n            \"cv_match_rate\": 0.2,\n            \"cv_feedback\": \"\",\n            \"cv_breakdown\": {\n                \"technical_skills\": 1,\n                \"experience_level\": 1,\n                \"achievements\": 1,\n                \"cultural_fit\": 1,\n                \"match_rate\": 0.2,\n                \"feedback\": \"\",\n                \"name\": null,\n                \"age\": null,\n                \"email\": null\n            },\n            \"project_score\": 1,\n            \"project_feedback\": \"\",\n            \"project_breakdown\": {\n                \"correctness\": 1,\n                \"code_quality\": 1,\n                \"resilience\": 1,\n                \"documentation\": 1,\n                \"creativity\": 1,\n                \"final_score\": 1,\n                \"feedback\": \"\"\n            },\n            \"overall_summary\": \"Candidate Summary:\\n- The candidate demonstrates a basic understanding of technical skills, but their experience level, achievements, cultural fit, and match rate are all low, indicating a need for further development.\\n- In terms of project work, their technical skills are evident, but the quality of their code, resilience, creativity, and documentation are all average.\\n- Recommendation: Consider this candidate for entry-level roles where they can gain more experience and develop their skills further. However, they may not be ready for more complex or demanding positions at this time.\"\n        },\n        \"error\": null\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2IiwiZXhwIjoxNzYxNDUxODg3fQ.bEw2MXIIYbIaRuqxnMspuGY394u1ef1TyzF936G6r_o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"I Putu Nanda Amanta\",\r\n    \"email\" : \"nansamgr@gmail.com\",\r\n    \"age\" : 20\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/v1/candidates/10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"candidates",
+								"10"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\" : \"I Putu Nanda Amanta\",\r\n    \"email\" : \"nansamgr@gmail.com\",\r\n    \"age\" : 20\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8000/api/v1/candidates/10",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"v1",
+										"candidates",
+										"10"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "date",
+									"value": "Sat, 25 Oct 2025 05:03:19 GMT"
+								},
+								{
+									"key": "server",
+									"value": "uvicorn"
+								},
+								{
+									"key": "content-length",
+									"value": "1335"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success\",\n    \"status_code\": 200,\n    \"data\": {\n        \"id\": 10,\n        \"name\": \"I Putu Nanda Amanta\",\n        \"email\": \"nansamgr@gmail.com\",\n        \"age\": 20,\n        \"cv_paths\": \"storage\\\\cv\\\\177085bf-9774-4c1a-99b3-535b2cd374d6.pdf\",\n        \"project_report_paths\": \"storage\\\\project\\\\c88ffb3b-4360-48b1-8e6c-f5d06394a16a.pdf\",\n        \"user_id\": 6,\n        \"status\": \"COMPLETED\",\n        \"evaluation_result_json\": {\n            \"cv_match_rate\": 0.2,\n            \"cv_feedback\": \"\",\n            \"cv_breakdown\": {\n                \"technical_skills\": 1,\n                \"experience_level\": 1,\n                \"achievements\": 1,\n                \"cultural_fit\": 1,\n                \"match_rate\": 0.2,\n                \"feedback\": \"\",\n                \"name\": null,\n                \"age\": null,\n                \"email\": null\n            },\n            \"project_score\": 1,\n            \"project_feedback\": \"\",\n            \"project_breakdown\": {\n                \"correctness\": 1,\n                \"code_quality\": 1,\n                \"resilience\": 1,\n                \"documentation\": 1,\n                \"creativity\": 1,\n                \"final_score\": 1,\n                \"feedback\": \"\"\n            },\n            \"overall_summary\": \"Candidate Summary:\\n- The candidate demonstrates a basic understanding of technical skills, but their experience level, achievements, cultural fit, and match rate are all low, indicating a need for further development.\\n- In terms of project work, their technical skills are evident, but the quality of their code, resilience, creativity, and documentation are all average.\\n- Recommendation: Consider this candidate for entry-level roles where they can gain more experience and develop their skills further. However, they may not be ready for more complex or demanding positions at this time.\"\n        },\n        \"error\": null\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Upload",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2IiwiZXhwIjoxNzYxMzQ4MDE2fQ.YdmGz4a40t9dZNFzs9MDpjv-GSjoz1teidtksnoInMk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "cv_files",
+									"type": "file",
+									"src": "/C:/Users/nansa/OneDrive/Documents/UPDATED_CV_I Putu Nanda Amanta_2025.pdf"
+								},
+								{
+									"key": "project_files",
+									"type": "file",
+									"src": "/C:/Users/nansa/OneDrive/Documents/Project Title.pdf"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/v1/candidates/upload",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"candidates",
+								"upload"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "file",
+											"type": "file",
+											"src": "/C:/Users/nansa/Downloads/WhatsApp Image 2025-10-21 at 09.47.51.jpeg"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:8000/api/v1/candidates/upload",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8000",
+									"path": [
+										"api",
+										"v1",
+										"candidates",
+										"upload"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "date",
+									"value": "Tue, 21 Oct 2025 09:00:08 GMT"
+								},
+								{
+									"key": "server",
+									"value": "uvicorn"
+								},
+								{
+									"key": "content-length",
+									"value": "168"
+								},
+								{
+									"key": "content-type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Success\",\n    \"status_code\": 201,\n    \"data\": {\n        \"name\": null,\n        \"age\": null,\n        \"user_id\": 6,\n        \"email\": null,\n        \"file_path\": \"storage\\\\81d7e0b2-7be4-41dc-a54b-128422886b52.jpeg\",\n        \"id\": 3\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Evaluate",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2IiwiZXhwIjoxNzYxNDAwNjgxfQ.1Rhd6BdWVVDXjX4-L567vyw2WAlQTz7AP-p1Vdp5e1k",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"candidate_ids\" : [10]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/v1/candidates/evaluate",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"candidates",
+								"evaluate"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

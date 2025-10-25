@@ -3,7 +3,7 @@ from src.dependencies import get_current_user
 from src.candidate.services.candidate_service import CandidateService 
 from src.candidate.services.evaluation_service import EvaluationService
 from src.commons.schemas import BaseApiResponse
-from src.candidate.schemas import CandidateEvaluation
+from src.candidate.schemas import CandidateEvaluation, CandidateUpdate
 from typing import List
 
 router = APIRouter(prefix="/candidates", tags=["candidate"])
@@ -29,6 +29,11 @@ async def create_candidate(cv_files: List[UploadFile] = File(..., description="L
 async def delete_candidate(id: int, user = Depends(get_current_user), service: CandidateService = Depends()) -> BaseApiResponse:
     return BaseApiResponse(data=service.delete(id, user["id"]), message="Success", status_code=200).make()
 
+
+@router.put('/{id}', status_code=200)
+async def update_candidate(id: int, user = Depends(get_current_user), data: CandidateUpdate = None, service: CandidateService = Depends()) -> BaseApiResponse:
+    result = service.update(id, data, user["id"])
+    return BaseApiResponse(data=result, message="Success", status_code=200).make()
 
 @router.post('/evaluate', status_code=200)
 async def evaluate_candidate( background_tasks: BackgroundTasks, data : CandidateEvaluation, user = Depends(get_current_user), service: EvaluationService  = Depends()) -> BaseApiResponse:
