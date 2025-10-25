@@ -18,6 +18,12 @@ class CandidateService:
         data = self.repository.paginate(request)
         data.items = [CandidateRead.from_orm(item) for item in data.items]
         return data
+    
+    def detail(self, id: int, user_id : int) -> CandidateRead:
+        data = self.repository.find_by_id(id)
+        if(data.user_id != user_id):
+            raise HTTPException(status_code=403, detail="Unauthorized")
+        return CandidateRead.from_orm(data)
 
     async def create(self, cv_files: List[UploadFile], project_files: List[UploadFile], user_id: int):
         cv_paths : List[str] = []

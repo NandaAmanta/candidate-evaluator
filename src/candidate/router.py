@@ -15,6 +15,11 @@ async def pagination(request: Request, user = Depends(get_current_user), service
     data = service.pagination(queries)
     return BaseApiResponse(data=data, message="Success", status_code=200).make()
 
+@router.get('/{id}', status_code=200)
+async def detail(id: int, user = Depends(get_current_user), service: CandidateService = Depends()) -> BaseApiResponse:
+    data = service.detail(id, user["id"])
+    return BaseApiResponse(data=data, message="Success", status_code=200).make()
+
 @router.post('/upload', status_code=201)
 async def create_candidate(cv_files: List[UploadFile] = File(..., description="List of cv files to upload"), project_files: List[UploadFile] = File(..., description="List of project files to upload"), user = Depends(get_current_user), service: CandidateService = Depends()) -> BaseApiResponse:
     data = await service.create(cv_files, project_files, user["id"])
